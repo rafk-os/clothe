@@ -1,0 +1,206 @@
+
+<app-alert></app-alert>
+<div class="container">
+  <div class="row">
+    <div class="col-lg-10 mx-auto">
+      <div class="career-search mb-60">
+
+        <form action="#" class="career-form mb-60 ">
+          <div class="row mt-2">
+            <div class="col-md-6 col-lg-3 my-3">
+              <div class="input-group position-relative">
+                <input type="text" class="form-control" placeholder="Enter Your Keywords" id="keywords">
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-3 my-3">
+              <div class="select-container">
+                <select class="custom-select">
+                  <option selected="">Made in</option>
+                  <option value="1">USA</option>
+                  <option value="2">UK</option>
+                  <option value="3">CHINA</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-3 my-3">
+              <div class="select-container">
+                <select class="custom-select">
+                  <option selected="">Select Item Type</option>
+                  <option value="1">Jeans</option>
+                  <option value="2">T-SHIRT</option>
+                  <option value="3">Pullover</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-3 my-3" >
+              <button type="button" class="btn btn-lg btn-block btn-light btn-custom" id="contact-submit">
+                Search
+              </button>
+              <button type="button" class="btn btn-lg btn-block btn-light btn-custom" style="margin-left: 15px" id="cart-submit" (click)="open_cart(content_cart)">
+                My Cart
+              </button>
+
+            </div>
+          </div>
+        </form>
+
+        <div class="filter-result ">
+          <div class="d-flex justify-content-between m-4">
+            <p class="mb-30 ff-montserrat mt-2" >Total number of items on sale : {{items.length}}</p>
+            <div>
+              <button type="button" class="btn btn-lg btn-block btn-light btn-custom add-item-button" (click)="goToOrders()"  style="margin-right: 35px"   id="orders" *ngIf="isAdmin == true"  >
+                Orders
+              </button>
+
+              <button type="button" class="btn btn-lg btn-block btn-light btn-custom add-item-button" (click)="open(content)"  style="margin-right: 35px"   id="add-item-submit" *ngIf="isAdmin == true"  >
+                Add new item
+              </button>
+
+            </div>
+
+
+          </div>
+
+          <div *ngFor="let item of items" class="job-box d-md-flex align-items-center justify-content-between mb-30">
+            <div class="job-left my-4 d-md-flex align-items-center flex-wrap">
+            <div style="margin-right: 45px"> {{item.name}}</div>
+              <div class="job-content">
+                <h5 class="text-center text-md-left">{{item.type}}</h5>
+                <p>{{item.description}}</p>
+              </div>
+            </div>
+            <div class="d-flex justify-content-between " style="margin-left: 150px">
+              <h5 class="text-center text-md-left">Price: {{item.price}} PLN</h5>
+            </div>
+            <div class="job-right my-4 flex-shrink-0">
+              <button  class="btn d-block w-100 d-sm-inline-block  " (click)="addItemToCart(item.id)" [ngClass]="{ 'btn-success' : item.addedToCart, 'btn-light' :!item.addedToCart }" [disabled]="item.addedToCart" >{{ item.addedToCart == true ? 'Added to Cart' : 'Add to cart' }} </button>
+              <button  class="btn d-block w-100 d-sm-inline-block btn-light mt-3" *ngIf="isAdmin == true" (click)="deleteItem(item.id)" >Delete item</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Add item</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="newItemForm" (ngSubmit)="onSubmit()">
+      <div class="mb-3">
+        <div class=" form-floating  mb-4">
+        <input id="name" class="form-control" formControlName = "name" [ngClass]="{ 'is-invalid': submitted && f['name'].errors }" placeholder="Blue Wide Jeans">
+          <label for="name" class="m-1">Name</label>
+        <div *ngIf="submitted && f['name'].errors" class="invalid-feedback">
+          <div *ngIf="f['name'].errors['required']">Name is required</div>
+        </div>
+        </div>
+
+        <div class=" form-floating  mb-4">
+        <input id="type" class="form-control" formControlName = "type" [ngClass]="{ 'is-invalid': submitted && f['type'].errors }" placeholder="Jeans">
+          <label for="type" class="m-1">Type</label>
+        <div *ngIf="submitted && f['type'].errors" class="invalid-feedback">
+          <div *ngIf="f['type'].errors['required']">Type is required</div>
+        </div>
+        </div>
+
+        <div class=" form-floating  mb-4">
+        <input id="description" class="form-control" formControlName = "description" [ngClass]="{ 'is-invalid': submitted && f['description'].errors }" placeholder="Historia o czarodziejach">
+          <label for="description" class="m-1">Description</label>
+        <div *ngIf="submitted && f['description'].errors" class="invalid-feedback">
+          <div *ngIf="f['description'].errors['required']">Description is required</div>
+        </div>
+        </div>
+
+        <div class=" form-floating  mb-4">
+          <input id="price" class="form-control" formControlName = "price" [ngClass]="{ 'is-invalid': submitted && f['price'].errors }" placeholder="50.99">
+          <label for="price" class="m-1">Price</label>
+          <div *ngIf="submitted && f['price'].errors" class="invalid-feedback">
+            <div *ngIf="f['price'].errors['required']">Price is required</div>
+          </div>
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-outline-dark" (click)=" modal.close()">Add</button>
+      </div>
+    </form>
+  </div>
+</ng-template>
+
+
+<ng-template #content_cart let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title-cart">Shopping Cart</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+  </div>
+      <div class="card">
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table table-bordered m-0">
+              <thead>
+              <tr>
+                <!-- Set columns width -->
+                <th class="text-center py-3 px-4" style="min-width: 400px;">Product Name &amp; Details</th>
+                <th class="text-right py-3 px-4" style="width: 100px;">Price</th>
+                <th class="text-center align-middle py-3 px-0" style="width: 40px;"><a href="#" class="shop-tooltip float-none text-light" title="" data-original-title="Clear cart"><i class="ino ion-md-trash"></i></a></th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let item of itemInCart" >
+                <td class="p-4">
+                  <div class="media align-items-center">
+                    <div class="media-body">
+                      <a href="#" class="d-block text-dark">{{item.name}}</a>
+                      <small>
+                        <span class="text-muted">Type: {{item.type}}</span>
+                      </small>
+                    </div>
+                    <div class="media-body">
+                      <small>
+                        <span class="text-muted"> {{item.description}}</span>
+                      </small>
+                    </div>
+                  </div>
+                </td>
+                <td class="text-right font-weight-semibold align-middle p-4">{{item.price}} PLN</td>
+                <td class="text-center align-middle px-0"><bi name="trash" class="big" (click)="deleteItemFromCart(item.id)" ></bi></td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+          <!-- / Shopping cart table -->
+
+          <div class="d-flex flex-wrap justify-content-between align-items-center pb-4">
+            <div class="mt-4">
+              <label class="text-muted font-weight-normal ">Promocode</label>
+              <input type="text" placeholder="ABC" class="form-control mt-1">
+            </div>
+            <div class="d-flex">
+              <div class="text-right mt-4">
+                <label class="text-muted font-weight-normal m-0">Total price</label>
+                <div class="text-large"><strong>{{sum}} PLN</strong></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="d-flex justify-content-between" >
+            <button type="button" class="btn btn-lg btn-default md-btn-flat mt-2 mr-3" (click)="modal.dismiss('Cross click')">Back to shopping</button>
+            <button type="button" class="btn btn-lg btn-primary mt-2" (click)="goToAddOrders()" >Order</button>
+          </div>
+
+        </div>
+      </div>
+
+
+
+
+
+</ng-template>
+
+

@@ -1,0 +1,94 @@
+<app-alert></app-alert>
+<div class="container">
+  <div class="row">
+    <div class="col-lg-10 mx-auto">
+      <div class="career-search mb-60">
+
+        <form action="#" class="career-form mb-60 ">
+          <div class="row mt-2">
+            <div class="col-md-6 col-lg-3 my-3">
+              <div class="input-group position-relative">
+                <input type="text" class="form-control" placeholder="Enter Your Keywords" id="keywords">
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-3 my-3">
+              <div class="select-container">
+                <select class="custom-select">
+                  <option selected="">City</option>
+                  <option value="1">Warszawa</option>
+                  <option value="2">Gdansk</option>
+                  <option value="3">Lubczyk</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-3 my-3">
+              <div class="select-container">
+                <select class="custom-select">
+                  <option selected="">Status</option>
+                  <option value="1">OPEN</option>
+                  <option value="2">CANCELED</option>
+                  <option value="3">DELIVERY</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-3 my-3" >
+              <button type="button" class="btn btn-lg btn-block btn-light btn-custom" id="contact-submit">
+                Search
+              </button>
+              <button type="button" class="btn btn-lg btn-block btn-light btn-custom" (click)="goToOrders()" style="margin-left: 15px" id="cart-submit">
+                Items
+              </button>
+
+            </div>
+          </div>
+        </form>
+
+        <div class="filter-result ">
+          <p class="mb-30 ff-montserrat mt-2" >Total number of orders : {{orders.length}}</p>
+          <div *ngFor="let order of orders" class="job-box d-md-flex align-items-center justify-content-between mb-30 mt-3">
+            <div class="job-left my-4 d-md-flex align-items-center flex-wrap">
+              <div style="margin-right: 45px"> {{order.id}}</div>
+              <div class="job-content mt-3">
+                <p>{{order.description}}</p>
+              </div>
+            </div>
+            <div class="d-flex justify-content-between " style="margin-left: 150px">
+              <h5 class="text-center text-md-left mt-3">{{order.status}} </h5>
+            </div>
+            <div class="job-right my-4 flex-shrink-0">
+              <button  class="btn d-block w-100 d-sm-inline-block btn-light mt-3"  (click)="open(content,order.id)" >Change Status</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Change status of order</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="newOrderStatusForm" (ngSubmit)="onSubmit()">
+      <div class="mb-3">
+          <select [(ngModel)]='nrSelect' class="form-control form-select-lg mb-3 " id="status"  formControlName = "status" [ngClass]="{ 'is-invalid': submitted && f['status'].errors }">
+            <option value="OPEN">OPEN</option>
+            <option value="CANCELED">CANCELED</option>
+            <option value="DELIVERING">DELIVERING</option>
+            <option value="CLOSED">CLOSED</option>
+            <option value="PREPARING">PREPARING</option>
+          </select>
+          <div *ngIf="submitted && f['status'].errors" class="invalid-feedback">
+            <div *ngIf="f['status'].errors['required']">Status is required</div>
+          </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-outline-dark" (click)=" modal.close()">Change</button>
+      </div>
+    </form>
+  </div>
+</ng-template>

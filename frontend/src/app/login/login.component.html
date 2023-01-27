@@ -1,0 +1,50 @@
+<section class="vh-100 gradient-custom flex ">
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center">
+      <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+        <app-alert></app-alert>
+        <div class="card bg-dark text-white" style="border-radius: 2rem;">
+          <div class="card-body p-5 text-center">
+            <div class="mb-md-5 mt-md-4 pb-5">
+              <h2 class="fw-bold mb-2 text-uppercase">Login</h2>
+              <p class="text-white-50 mb-5">Please enter your login and password!</p>
+
+              <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+              <div class=" form-floating  mb-4">
+                <input type="username" formControlName="username"  class="form-control" id="usernameId" [ngClass]="{ 'is-invalid': submitted && f['username'].errors }" placeholder="name">
+                <label for="usernameId" style="color: black">Username</label>
+                <div *ngIf="submitted && f['username'].errors" class="invalid-feedback">
+                  <div *ngIf="f['username'].errors['required']">Username is required</div>
+                </div>
+              </div>
+
+              <div class="form-floating  mb-4">
+                <input type="password" formControlName="password" id="passwordId" class="form-control" [ngClass]="{ 'is-invalid': submitted && f['password'].errors }" placeholder="haslo"  />
+                <label for="passwordId" style="color: black">Password</label>
+                <div *ngIf="submitted && f['password'].errors" class="invalid-feedback">
+                  <div *ngIf="f['password'].errors['required']" >Password is required</div>
+                </div>
+              </div>
+
+                <p class="small mb-5 pb-lg-2"><a class="text-white-50" href="#!">Forgot password?</a></p>
+
+                <div class="form-group">
+              <button class="btn btn-outline-light btn-lg px-5" type="submit">
+                <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                Login
+              </button>
+                </div>
+
+              </form>
+            </div>
+
+            <div>
+              <p class="mb-0">Don't have an account? <a routerLink="/register" class="text-white-50 fw-bold">Sign up</a>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
