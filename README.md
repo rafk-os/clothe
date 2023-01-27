@@ -21,4 +21,5 @@ Do tej aplikacji wymagane jest posiadanie npm oraz nodejs wraz z angular/cli (or
 ### Działanie
 Całość zostało wykonane w opraciu o Angular oraz bootstrap. Aplikacja po zalogowaniu umieszcza dane odnośni użytkownika w local storage oraz na podstawie tego jest potem do kazdego requesta dokejany nagłówek z JWT tokenem. Poza tym prezentuje ona wszystkie funkcjonalności wcześniej opisane. Integracja z systemem płatności odbywa się za pośrednictem Stripe dzięki któremu mozna zobaczyc wszystkie transakcje w formie testowej na ich stronie.
 
-![str1](https://user-images.githubusercontent.com/61945072/215203911-113cf47c-8e6e-4896-ab67-b8c0018b6bd8.png)
+![str2](https://user-images.githubusercontent.com/61945072/215204247-24a95972-41c8-4570-85f1-feaaf6bf31c5.png)
+
