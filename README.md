@@ -23,3 +23,26 @@ Całość zostało wykonane w opraciu o Angular oraz bootstrap. Aplikacja po zal
 
 ![str2](https://user-images.githubusercontent.com/61945072/215204247-24a95972-41c8-4570-85f1-feaaf6bf31c5.png)
 
+Poniżej kilka zdjęć z działającej aplikacji:
+
+![1](https://user-images.githubusercontent.com/61945072/215565379-d6073d74-aca6-471d-a422-ac055786c7ce.png)
+
+![2](https://user-images.githubusercontent.com/61945072/215565415-49f732d7-5f5d-48d1-9375-b5e8cbc985bb.png)
+
+![3](https://user-images.githubusercontent.com/61945072/215565471-9ad90b8e-eb4b-46fb-b73e-4dc08753dfad.png)
+
+![4](https://user-images.githubusercontent.com/61945072/215565484-4ad36713-9797-4ebf-9e46-3e410a8f3b91.png)
+
+![5](https://user-images.githubusercontent.com/61945072/215565503-da0912f1-f1a3-436b-880a-c3d05681672f.png)
+
+![6](https://user-images.githubusercontent.com/61945072/215565525-0dd2b524-fb60-49b2-8509-f67f19d3920d.png)
+
+![7](https://user-images.githubusercontent.com/61945072/215565542-54d040a0-7e41-4883-8353-cb7213f27267.png)
+
+![8](https://user-images.githubusercontent.com/61945072/215565578-fcc2da10-4abb-4947-b1e0-2d2f3b67b95e.png)
+
+![9](https://user-images.githubusercontent.com/61945072/215565590-b4c006a2-b247-4920-acd7-5e97d2873bc7.png)
+
+![10](https://user-images.githubusercontent.com/61945072/215565610-48280e98-5a6c-4070-8470-318b9ca66a44.png)
+
+
